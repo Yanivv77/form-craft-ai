@@ -9,6 +9,22 @@ database, auth, AI, and the builder are added by a separate implementation promp
 on top of this baseline. The goal of this repo is a clean foundation that **boots
 under the real Cloudflare runtime** (`pnpm preview` / workerd), not just `next dev`.
 
+## Pre-implementation readiness
+
+Complete before starting the full implementation prompt. Secrets stay in `.dev.vars`
+locally and as Cloudflare Worker secrets in production — never committed. See
+README → "Environment & keys" for how to obtain each value.
+
+- [ ] **Neon dev DB created** — project + pooled `DATABASE_URL`.
+- [ ] **Neon test DB or branch planned** — a separate branch/DB for e2e/CI (no shared data with dev).
+- [ ] **`.dev.vars` created locally** — `cp .dev.vars.example .dev.vars`, real values filled in, still untracked.
+- [ ] **Google OAuth callback URLs configured** — `http://localhost:3000/api/auth/callback/google` + the production origin's callback added in Google Cloud Console.
+- [ ] **Gemini key created** — `GEMINI_API_KEY` from AI Studio; `GEMINI_MODEL=gemini-2.5-flash-lite`.
+- [ ] **Cloudflare secrets planned** — know the `pnpm wrangler secret put <NAME>` set to run for production (DATABASE_URL, BETTER_AUTH_SECRET, BETTER_AUTH_URL, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GEMINI_API_KEY, GEMINI_MODEL, E2E_TEST_MODE).
+- [ ] **No secrets committed** — `git status` clean; only `.dev.vars.example` (placeholders) is tracked; `git ls-files` shows no `.dev.vars` / `.env`.
+- [ ] **`pnpm preview` passes** — boots under workerd.
+- [ ] **`pnpm check` passes** — typecheck + lint + e2e green.
+
 ## Stack
 
 - Next.js 16.2.6 (App Router, React 19, TypeScript, Turbopack)
@@ -108,3 +124,4 @@ workers-sdk#13755). Hebrew + RTL + the theme toggle are deferred to the implemen
 - **2026-06-15** — `src/` flattened to repo root; `@/*` → `./*` to match the layering the implementation prompt expects.
 - **2026-06-15** — Native build scripts in `pnpm-workspace.yaml`: `esbuild`/`workerd`/`sharp`/`unrs-resolver` approved; `@parcel/watcher`/`@swc/core` set to `false` (prebuilt binaries used).
 - **2026-06-15** — Playwright `--with-deps` skipped during setup (needs sudo on WSL); Chromium launches with the OS libraries already present. Run `pnpm test:e2e:install` on a fresh machine.
+- **2026-06-15** — **Better Auth + Drizzle + Neon on Workers (guidance for the implementation phase).** Supported combo via Better Auth's `drizzleAdapter`. Two runtime constraints to honor when wiring it up: (1) **Driver** — use Neon's serverless driver (`@neondatabase/serverless` + `drizzle-orm/neon-http`) over the **pooled** `DATABASE_URL`, never node `pg` (workerd has no raw TCP). If a flow needs a real multi-statement transaction, use the Neon serverless **WebSocket** driver for that path (`neon-http` is one round-trip per query). (2) **Per-request** — build the Drizzle client and the Better Auth instance inside the request via `getEnv()` (`lib/cf.ts`), never at module scope. Schema (`user`/`session`/`account`/`verification`) is generated with `@better-auth/cli generate` and migrated onto Neon with Drizzle.

@@ -1,23 +1,35 @@
-# Copy to `.dev.vars` and fill in real values for local development.
-# `.dev.vars` is gitignored — never commit real secrets. In production these
-# are set with `wrangler secret put <NAME>` (or the Cloudflare dashboard).
+# Local development env for FormCraftAI.
 #
-# NOTE: none of these are consumed yet. They document what the implementation
-# prompt (database, auth, AI) will need. Read per-request via lib/cf.ts getEnv().
+# Copy this file to `.dev.vars` and fill in REAL values:
+#   cp .dev.vars.example .dev.vars
+#
+# `.dev.vars` is gitignored — never commit real secrets. In production, set the
+# same variables as Cloudflare Worker secrets (see README "Production secrets").
+# At runtime, read these per-request via lib/cf.ts getEnv() — never at module scope.
+#
+# The values below are PLACEHOLDERS, not real keys. Replace every placeholder
+# except the safe defaults (BETTER_AUTH_URL, GEMINI_MODEL, E2E_TEST_MODE).
+#
+# NOTE: nothing in the baseline consumes these yet — they are wired up by the
+# full implementation prompt (Neon + Drizzle, Better Auth + Google, Gemini).
 
-# Neon Postgres connection string (Drizzle)
-# DATABASE_URL=
+# --- Database: Neon Postgres (used by Drizzle) ---
+DATABASE_URL="postgresql://USER:PASSWORD@HOST/DBNAME?sslmode=require"
 
-# Better Auth — session signing secret. Generate: openssl rand -base64 32
-# BETTER_AUTH_SECRET=
+# --- Better Auth ---
+# Session signing secret. Generate: openssl rand -base64 32
+BETTER_AUTH_SECRET="replace-with-openssl-rand-base64-32"
+# App base URL. Local dev = http://localhost:3000; production = your deployed origin.
+BETTER_AUTH_URL="http://localhost:3000"
 
-# Google OAuth (Better Auth social provider)
-# GOOGLE_CLIENT_ID=
-# GOOGLE_CLIENT_SECRET=
+# --- Google OAuth (Better Auth social provider) ---
+GOOGLE_CLIENT_ID="replace.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET="replace-google-client-secret"
 
-# Google Gemini
-# GEMINI_API_KEY=
-# GEMINI_MODEL=gemini-2.5-flash
+# --- Google Gemini ---
+GEMINI_API_KEY="replace-with-gemini-api-key"
+GEMINI_MODEL="gemini-2.5-flash-lite"
 
-# Set to "1" to enable deterministic test-mode shortcuts during e2e runs
-# E2E_TEST_MODE=
+# --- Testing ---
+# "true" enables deterministic test-mode shortcuts during e2e runs.
+E2E_TEST_MODE="false"
