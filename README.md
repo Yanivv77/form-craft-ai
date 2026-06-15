@@ -117,6 +117,39 @@ pnpm wrangler secret put E2E_TEST_MODE
 Never paste secrets into source files, commits, or chat. See AGENTS.md →
 **Pre-implementation readiness**.
 
+## Deploy (Cloudflare Workers)
+
+Local dev needs no Cloudflare account — deploy only when you're ready to ship.
+There's no API key to store and no Worker to pre-create: `wrangler login` is
+interactive (browser OAuth) and `pnpm deploy` creates the Worker automatically.
+
+1. **One-time** — a free [Cloudflare account](https://dash.cloudflare.com/sign-up),
+   then authenticate wrangler (token stored locally in `~/.config/.wrangler`, never in the repo):
+   ```bash
+   pnpm wrangler login
+   ```
+2. **Deploy** — builds the OpenNext bundle and creates/updates the Worker
+   (`name: "form-craft-ai"` from `wrangler.jsonc`):
+   ```bash
+   pnpm deploy   # = opennextjs-cloudflare build && opennextjs-cloudflare deploy
+   ```
+   The first deploy prints your URL, e.g. `https://form-craft-ai.<subdomain>.workers.dev`.
+3. **Production secrets** — push the same values as your local `.dev.vars` (encrypted
+   on the Worker, never committed). Use the `pnpm wrangler secret put …` list under
+   [Production secrets](#3-production-secrets-cloudflare) above. Set these before
+   deploying code that reads them (the baseline reads none, so it deploys without them).
+4. **Point auth at the deployed origin** (when auth lands in the implementation phase):
+   - Set production `BETTER_AUTH_URL` to the deployed URL — either
+     `pnpm wrangler secret put BETTER_AUTH_URL`, or a non-secret `vars` entry in
+     `wrangler.jsonc` (a URL isn't a secret).
+   - Add `<deployed-origin>/api/auth/callback/google` to the Google OAuth
+     **Authorized redirect URIs**.
+
+Tip: verify the exact build that ships, locally first, with `pnpm preview` (same
+workerd runtime). To roll back, redeploy a previous commit. CI/automated deploys
+would use a `CLOUDFLARE_API_TOKEN` GitHub secret (not `.dev.vars`) — out of scope
+until you set up CI.
+
 ## Conventions
 
 See **[AGENTS.md](./AGENTS.md)** — especially the Cloudflare runtime rules
