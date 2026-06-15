@@ -55,4 +55,10 @@ next-env.d.ts
 /blob-report/
 /.playwright/
 
+# disposable e2e test database url (written by scripts/setup-test-db.mjs)
+.test-db-url
+
 .claude/
+.agent/
+.agents/
+skills-lock.json

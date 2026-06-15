@@ -13,7 +13,8 @@
 			"!.open-next",
 			"!.next",
 			"!.wrangler",
-			"!public"
+			"!public",
+			"!design-system"
 		]
 	},
 	"formatter": {

@@ -20,7 +20,9 @@ export default defineConfig({
 	},
 	projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
 	webServer: {
-		command: "pnpm preview",
+		// Builds + serves the OpenNext bundle on workerd, injecting E2E_TEST_MODE
+		// (and an isolated DATABASE_URL when .test-db-url exists) via wrangler --var.
+		command: "node scripts/preview-e2e.mjs",
 		url: baseURL,
 		reuseExistingServer: !process.env.CI,
 		timeout: 240 * 1000,

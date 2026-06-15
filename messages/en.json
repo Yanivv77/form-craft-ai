@@ -1,11 +1,135 @@
 {
-	"HomePage": {
-		"title": "Form Craft AI",
-		"description": "The boring, verified foundation is ready. The product is built on top of this baseline.",
-		"cta": "Get started"
+	"Header": {
+		"appName": "Form Craft AI",
+		"myForms": "My forms",
+		"signIn": "Sign in",
+		"signOut": "Sign out"
+	},
+	"SignIn": {
+		"heading": "Sign in to continue",
+		"subtitle": "Taking you to Google to finish signing in.",
+		"cta": "Continue with Google"
+	},
+	"Footer": {
+		"tagline": "Build forms with AI.",
+		"copyright": "© {year} Form Craft AI. All rights reserved."
+	},
+	"Builder": {
+		"heroTitle": "From idea to <accent>form</accent>.",
+		"heroSubtitle": "Describe what you need. The AI drafts the questions, and you edit anything before you save.",
+		"heroTagline": "Build <survey>surveys</survey>, <signup>sign-ups</signup>, <quiz>quizzes</quiz> and <feedback>feedback</feedback> forms with AI",
+		"ideaLabel": "Form idea",
+		"ideaPlaceholder": "Describe your form — e.g. a volunteer sign-up with name, email, and t-shirt size",
+		"inputHint": "AI drafts questions you can edit",
+		"generate": "Generate",
+		"generating": "Generating…",
+		"titleLabel": "Form title",
+		"titlePlaceholder": "Form title",
+		"descriptionLabel": "Form description",
+		"descriptionPlaceholder": "Description (optional)",
+		"untitledTitle": "Untitled form",
+		"questions": "Questions",
+		"addQuestion": "Add question",
+		"save": "Save form",
+		"saveChanges": "Save changes",
+		"saving": "Saving…",
+		"genericError": "Couldn't generate that form. Please try again.",
+		"networkError": "Couldn't reach the generator. Please try again.",
+		"saveError": "Couldn't save your form. Please try again.",
+		"stepCreate": "Create",
+		"stepEdit": "Edit",
+		"stepPreview": "Preview",
+		"back": "Back",
+		"backToEdit": "Back to edit",
+		"continueToPreview": "Continue to preview",
+		"saveSignIn": "Sign in to save",
+		"saveHint": "Sign in with Google to save your form and get a shareable link.",
+		"examplesLabel": "Try one",
+		"noAccountHint": "No account needed to start. Your draft stays in this browser until you sign in to save.",
+		"examples": [
+			"Volunteer sign-up",
+			"Event RSVP",
+			"Customer feedback",
+			"Job application"
+		],
+		"buildManually": "or build it from scratch"
+	},
+	"FieldEditor": {
+		"questionLabel": "Question label",
+		"questionPlaceholder": "Question",
+		"fieldType": "Field type",
+		"placeholderLabel": "Placeholder",
+		"placeholderPlaceholder": "Placeholder (optional)",
+		"option": "Option {n}",
+		"addOption": "Add option",
+		"removeOption": "Remove",
+		"required": "Required",
+		"moveUp": "Move up",
+		"moveDown": "Move down",
+		"remove": "Remove question",
+		"delete": "Delete",
+		"types": {
+			"short_text": "Short text",
+			"long_text": "Long text",
+			"email": "Email",
+			"url": "URL",
+			"number": "Number",
+			"date": "Date",
+			"select": "Dropdown",
+			"radio": "Single choice",
+			"checkbox": "Multiple choice"
+		}
+	},
+	"Preview": {
+		"eyebrow": "Live preview",
+		"untitledForm": "Untitled form",
+		"untitledQuestion": "Untitled question",
+		"empty": "Add a question to see the preview."
+	},
+	"PublicForm": {
+		"submit": "Submit",
+		"submitting": "Submitting…",
+		"select": "Select…",
+		"thanksTitle": "Thanks!",
+		"thanksBody": "Your response has been recorded.",
+		"error": "Something went wrong. Please try again."
+	},
+	"Dashboard": {
+		"title": "Your forms",
+		"newForm": "New form",
+		"formCount": "{count, plural, =1 {1 form} other {# forms}}",
+		"questionsCount": "{count, plural, =0 {No questions} =1 {1 question} other {# questions}}",
+		"responses": "Responses",
+		"updated": "Updated {date}",
+		"emptyLead": "No forms yet.",
+		"emptySub": "Describe an idea and the AI drafts your first set of questions.",
+		"emptyCta": "Build your first one.",
+		"edit": "Edit",
+		"share": "Share",
+		"shareTitle": "Share form",
+		"shareSubtitle": "Anyone with this link can open and respond to your form.",
+		"copy": "Copy",
+		"copied": "Copied",
+		"openForm": "Open form",
+		"close": "Close",
+		"delete": "Delete"
+	},
+	"OwnerForm": {
+		"edit": "Edit",
+		"delete": "Delete",
+		"shareLink": "Share link:",
+		"responses": "Responses ({count})",
+		"noResponses": "No responses yet.",
+		"exportCsv": "Export CSV"
+	},
+	"LanguageSwitcher": {
+		"label": "Language",
+		"english": "English",
+		"hebrew": "עברית"
 	},
 	"NotFound": {
 		"title": "Page not found",
-		"description": "The page you’re looking for doesn’t exist."
+		"description": "The page you’re looking for doesn’t exist.",
+		"backHome": "Back to home"
 	}
 }

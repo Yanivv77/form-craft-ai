@@ -1,0 +1,135 @@
+{
+	"Header": {
+		"appName": "Form Craft AI",
+		"myForms": "הטפסים שלי",
+		"signIn": "התחברות",
+		"signOut": "התנתקות"
+	},
+	"SignIn": {
+		"heading": "התחברות כדי להמשיך",
+		"subtitle": "מעבירים אתכם ל‑Google להשלמת ההתחברות.",
+		"cta": "המשך עם Google"
+	},
+	"Footer": {
+		"tagline": "בניית טפסים בעזרת AI.",
+		"copyright": "© {year} Form Craft AI. כל הזכויות שמורות."
+	},
+	"Builder": {
+		"heroTitle": "מרעיון ל<accent>טופס</accent>.",
+		"heroSubtitle": "כתבו רעיון ותנו לבינה המלאכותית לנסח את השאלות. אפשר לערוך הכול לפני השמירה.",
+		"heroTagline": "בנו טפסי <survey>סקרים</survey>, <signup>הרשמות</signup>, <quiz>חידונים</quiz> ו־<feedback>משוב</feedback> בעזרת AI",
+		"ideaLabel": "רעיון לטופס",
+		"ideaPlaceholder": "תארו את הטופס — לדוגמה: הרשמת מתנדבים עם שם, אימייל ומידת חולצה",
+		"inputHint": "הבינה המלאכותית מנסחת שאלות שאפשר לערוך",
+		"generate": "יצירה",
+		"generating": "יוצר…",
+		"titleLabel": "כותרת הטופס",
+		"titlePlaceholder": "כותרת הטופס",
+		"descriptionLabel": "תיאור הטופס",
+		"descriptionPlaceholder": "תיאור (לא חובה)",
+		"untitledTitle": "טופס ללא שם",
+		"questions": "שאלות",
+		"addQuestion": "הוספת שאלה",
+		"save": "שמירת הטופס",
+		"saveChanges": "שמירת שינויים",
+		"saving": "שומר…",
+		"genericError": "לא הצלחנו ליצור את הטופס. נסו שוב.",
+		"networkError": "לא הצלחנו להגיע למחולל. נסו שוב.",
+		"saveError": "לא הצלחנו לשמור את הטופס. נסו שוב.",
+		"stepCreate": "יצירה",
+		"stepEdit": "עריכה",
+		"stepPreview": "תצוגה מקדימה",
+		"back": "חזרה",
+		"backToEdit": "חזרה לעריכה",
+		"continueToPreview": "המשך לתצוגה מקדימה",
+		"saveSignIn": "התחברו כדי לשמור",
+		"saveHint": "התחברו עם Google כדי לשמור את הטופס ולקבל קישור לשיתוף.",
+		"examplesLabel": "נסו אחד",
+		"noAccountHint": "אין צורך בחשבון כדי להתחיל. הטיוטה נשמרת בדפדפן עד שתתחברו לשמירה.",
+		"examples": [
+			"הרשמה למתנדבים",
+			"אישור הגעה לאירוע",
+			"משוב לקוחות",
+			"מועמדות למשרה"
+		],
+		"buildManually": "או בנו טופס מאפס"
+	},
+	"FieldEditor": {
+		"questionLabel": "תווית השאלה",
+		"questionPlaceholder": "שאלה",
+		"fieldType": "סוג שדה",
+		"placeholderLabel": "טקסט מציין",
+		"placeholderPlaceholder": "טקסט מציין (לא חובה)",
+		"option": "אפשרות {n}",
+		"addOption": "הוספת אפשרות",
+		"removeOption": "הסרה",
+		"required": "חובה",
+		"moveUp": "העברה למעלה",
+		"moveDown": "העברה למטה",
+		"remove": "הסרת שאלה",
+		"delete": "מחיקה",
+		"types": {
+			"short_text": "טקסט קצר",
+			"long_text": "טקסט ארוך",
+			"email": "אימייל",
+			"url": "כתובת אתר",
+			"number": "מספר",
+			"date": "תאריך",
+			"select": "רשימה נפתחת",
+			"radio": "בחירה יחידה",
+			"checkbox": "בחירה מרובה"
+		}
+	},
+	"Preview": {
+		"eyebrow": "תצוגה מקדימה",
+		"untitledForm": "טופס ללא שם",
+		"untitledQuestion": "שאלה ללא שם",
+		"empty": "הוסיפו שאלה כדי לראות תצוגה מקדימה."
+	},
+	"PublicForm": {
+		"submit": "שליחה",
+		"submitting": "שולח…",
+		"select": "בחירה…",
+		"thanksTitle": "תודה!",
+		"thanksBody": "התשובה שלכם נקלטה.",
+		"error": "משהו השתבש. נסו שוב."
+	},
+	"Dashboard": {
+		"title": "הטפסים שלי",
+		"newForm": "טופס חדש",
+		"formCount": "{count, plural, =1 {טופס אחד} =2 {שני טפסים} other {# טפסים}}",
+		"questionsCount": "{count, plural, =0 {אין שאלות} =1 {שאלה אחת} =2 {שתי שאלות} other {# שאלות}}",
+		"responses": "תשובות",
+		"updated": "עודכן ב-{date}",
+		"emptyLead": "אין עדיין טפסים.",
+		"emptySub": "תארו רעיון והבינה המלאכותית תנסח עבורכם את השאלות הראשונות.",
+		"emptyCta": "בנו את הראשון שלכם.",
+		"edit": "עריכה",
+		"share": "שיתוף",
+		"shareTitle": "שיתוף הטופס",
+		"shareSubtitle": "כל מי שיש לו את הקישור יכול לפתוח את הטופס ולהשיב עליו.",
+		"copy": "העתקה",
+		"copied": "הועתק",
+		"openForm": "פתיחת הטופס",
+		"close": "סגירה",
+		"delete": "מחיקה"
+	},
+	"OwnerForm": {
+		"edit": "עריכה",
+		"delete": "מחיקה",
+		"shareLink": "קישור לשיתוף:",
+		"responses": "תשובות ({count})",
+		"noResponses": "אין עדיין תשובות.",
+		"exportCsv": "ייצוא CSV"
+	},
+	"LanguageSwitcher": {
+		"label": "שפה",
+		"english": "English",
+		"hebrew": "עברית"
+	},
+	"NotFound": {
+		"title": "הדף לא נמצא",
+		"description": "הדף שחיפשתם לא קיים.",
+		"backHome": "חזרה לדף הבית"
+	}
+}

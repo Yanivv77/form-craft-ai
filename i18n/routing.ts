@@ -6,6 +6,11 @@ import { defineRouting } from "next-intl/routing";
  * routing, the proxy matcher and navigation all derive from this.
  */
 export const routing = defineRouting({
-	locales: ["en"],
+	locales: ["en", "he"],
 	defaultLocale: "en",
 });
+
+/** Content/UI direction for a locale. Hebrew is RTL; everything else LTR. */
+export function localeDirection(locale: string): "rtl" | "ltr" {
+	return locale === "he" ? "rtl" : "ltr";
+}

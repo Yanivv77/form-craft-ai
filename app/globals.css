@@ -2,14 +2,21 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* Light-only system. Keep dark class-scoped (never applied) so any stray
+   `dark:` utility from shadcn imports can't activate via prefers-color-scheme. */
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
-	--font-sans: var(--font-sans);
-	--font-mono: var(--font-geist-mono);
-	--font-heading: var(--font-sans);
+	/* Pastel — Figtree is the sole display/text family. Heebo covers Hebrew
+	   glyphs (Figtree is Latin-only) via per-glyph fallback; no :lang rule needed. */
+	--font-sans:
+		var(--font-figtree), var(--font-heebo), ui-sans-serif, system-ui,
+		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	--font-heading:
+		var(--font-figtree), var(--font-heebo), ui-sans-serif, system-ui, sans-serif;
+	--font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
 	--color-sidebar-ring: var(--sidebar-ring);
 	--color-sidebar-border: var(--sidebar-border);
 	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -39,84 +46,52 @@
 	--color-popover: var(--popover);
 	--color-card-foreground: var(--card-foreground);
 	--color-card: var(--card);
+	/* Radius pivots on the signature 8.8px (--radius). Tailwind's rounded-lg
+	   resolves to it; cards/buttons/inputs/badges all use rounded-lg. */
 	--radius-sm: calc(var(--radius) * 0.6);
 	--radius-md: calc(var(--radius) * 0.8);
 	--radius-lg: var(--radius);
-	--radius-xl: calc(var(--radius) * 1.4);
-	--radius-2xl: calc(var(--radius) * 1.8);
-	--radius-3xl: calc(var(--radius) * 2.2);
-	--radius-4xl: calc(var(--radius) * 2.6);
+	--radius-xl: calc(var(--radius) * 1.7); /* ~15px decorative */
+	--radius-2xl: calc(var(--radius) * 1.7);
+	--radius-3xl: calc(var(--radius) * 1.7);
+	--radius-4xl: calc(var(--radius) * 1.7);
 }
 
 :root {
-	/* Calm Futurism — soft periwinkle blue + sage green (light). See design-system/form-craft-ai/MASTER.md */
-	--background: oklch(0.981 0.005 258.3);
-	--foreground: oklch(0.292 0.034 260.8);
-	--card: oklch(1 0 0);
-	--card-foreground: oklch(0.292 0.034 260.8);
-	--popover: oklch(1 0 0);
-	--popover-foreground: oklch(0.292 0.034 260.8);
-	--primary: oklch(0.541 0.176 269.2);
-	--primary-foreground: oklch(1 0 0);
-	--secondary: oklch(0.949 0.020 270.2);
-	--secondary-foreground: oklch(0.431 0.145 271.7);
-	--muted: oklch(0.958 0.009 264.5);
-	--muted-foreground: oklch(0.544 0.039 263.4);
-	--accent: oklch(0.684 0.105 166.5);
-	--accent-foreground: oklch(0.247 0.033 172.1);
-	--destructive: oklch(0.571 0.154 23.3);
-	--border: oklch(0.936 0.013 262.4);
-	--input: oklch(0.936 0.013 262.4);
-	--ring: oklch(0.541 0.176 269.2);
-	--chart-1: oklch(0.541 0.176 269.2);
-	--chart-2: oklch(0.684 0.105 166.5);
-	--chart-3: oklch(0.717 0.108 270.5);
-	--chart-4: oklch(0.727 0.072 213.3);
-	--chart-5: oklch(0.791 0.091 68.0);
-	--radius: 0.625rem;
-	--sidebar: oklch(0.967 0.009 264.5);
-	--sidebar-foreground: oklch(0.292 0.034 260.8);
-	--sidebar-primary: oklch(0.541 0.176 269.2);
-	--sidebar-primary-foreground: oklch(1 0 0);
-	--sidebar-accent: oklch(0.949 0.020 270.2);
-	--sidebar-accent-foreground: oklch(0.431 0.145 271.7);
-	--sidebar-border: oklch(0.936 0.013 262.4);
-	--sidebar-ring: oklch(0.541 0.176 269.2);
-}
-
-.dark {
-	/* Calm Futurism — soft slate base, no glow (dark). See design-system/form-craft-ai/MASTER.md */
-	--background: oklch(0.222 0.028 262.4);
-	--foreground: oklch(0.939 0.012 259.8);
-	--card: oklch(0.259 0.031 260.4);
-	--card-foreground: oklch(0.939 0.012 259.8);
-	--popover: oklch(0.259 0.031 260.4);
-	--popover-foreground: oklch(0.939 0.012 259.8);
-	--primary: oklch(0.721 0.119 271.4);
-	--primary-foreground: oklch(0.194 0.034 267.6);
-	--secondary: oklch(0.295 0.043 265.1);
-	--secondary-foreground: oklch(0.867 0.051 271.9);
-	--muted: oklch(0.300 0.036 260.1);
-	--muted-foreground: oklch(0.710 0.030 261.4);
-	--accent: oklch(0.756 0.088 168.9);
-	--accent-foreground: oklch(0.222 0.025 173.1);
-	--destructive: oklch(0.723 0.106 20.0);
-	--border: oklch(0.341 0.045 263.7);
-	--input: oklch(0.341 0.045 263.7);
-	--ring: oklch(0.721 0.119 271.4);
-	--chart-1: oklch(0.721 0.119 271.4);
-	--chart-2: oklch(0.756 0.088 168.9);
-	--chart-3: oklch(0.783 0.093 274.5);
-	--chart-4: oklch(0.780 0.064 216.8);
-	--chart-5: oklch(0.840 0.074 73.9);
-	--sidebar: oklch(0.234 0.030 261.3);
-	--sidebar-foreground: oklch(0.939 0.012 259.8);
-	--sidebar-primary: oklch(0.721 0.119 271.4);
-	--sidebar-primary-foreground: oklch(0.194 0.034 267.6);
-	--sidebar-accent: oklch(0.295 0.043 265.1);
-	--sidebar-accent-foreground: oklch(0.867 0.051 271.9);
-	--sidebar-border: oklch(0.341 0.045 263.7);
-	--sidebar-ring: oklch(0.721 0.119 271.4);
+	/* Pastel — quiet paper canvas, one cobalt stamp.
+	   See design-system/form-craft-ai/MASTER.md. Hex values mirror tokens.json. */
+	--background: #f5f5f4; /* Paper Stone — page canvas */
+	--foreground: #111111; /* Ink Black — primary text */
+	--card: #ffffff; /* Pure White — card surface on the canvas */
+	--card-foreground: #111111;
+	--popover: #ffffff;
+	--popover-foreground: #111111;
+	--primary: #165dfb; /* Cobalt Stamp — the single accent */
+	--primary-foreground: #ffffff;
+	--secondary: #e6e3e2; /* Chalk — quiet secondary surface / button */
+	--secondary-foreground: #1f1f1f;
+	--muted: #ecebe9; /* subtle band, one step off the canvas */
+	--muted-foreground: #6b6259; /* warm gray, ≥4.5:1 on paper and on white */
+	--accent: #165dfb; /* one accent only — cobalt */
+	--accent-foreground: #ffffff;
+	--destructive: #b42318; /* accessible error red (~6.5:1 on white) */
+	--border: #d1dee8; /* Ice Line — cool hairline borders */
+	--input: #d1dee8;
+	--ring: #165dfb; /* cobalt focus ring */
+	--chart-1: #165dfb;
+	--chart-2: #45403c;
+	--chart-3: #78716b;
+	--chart-4: #5b8def;
+	--chart-5: #b6c6d4;
+	--radius: 8.8px; /* the signature — between 8 and 10, deliberately not round */
+	--sidebar: #f5f5f4;
+	--sidebar-foreground: #111111;
+	--sidebar-primary: #165dfb;
+	--sidebar-primary-foreground: #ffffff;
+	--sidebar-accent: #e6e3e2;
+	--sidebar-accent-foreground: #1f1f1f;
+	--sidebar-border: #d1dee8;
+	--sidebar-ring: #165dfb;
 }
 
 @layer base {
@@ -124,9 +99,118 @@
 		@apply border-border outline-ring/50;
 	}
 	body {
-		@apply bg-background text-foreground;
+		/* font-sans lives here, not on <html>: next/font defines --font-figtree
+		   on <body>, so the family must resolve on the element that owns the var. */
+		@apply bg-background text-foreground font-sans antialiased;
+		text-rendering: optimizeLegibility;
 	}
 	html {
-		@apply font-sans;
+		scroll-behavior: smooth;
+	}
+	::selection {
+		background: color-mix(in oklch, var(--primary) 20%, transparent);
+	}
+	/* Pastel headings — Figtree with negative tracking that tightens with size. */
+	h1,
+	h2,
+	h3 {
+		font-family: var(--font-heading);
+		letter-spacing: -0.02em;
+		text-wrap: balance;
+	}
+	h1 {
+		letter-spacing: -0.022em;
+	}
+	p {
+		text-wrap: pretty;
+	}
+}
+
+@layer components {
+	/* Shared control surface for inputs / textareas / selects. Flat: white fill,
+	   ice-line hairline, cobalt focus ring (an accessibility affordance, not
+	   decorative elevation). RTL-safe. */
+	.field-input {
+		border-radius: var(--radius-lg); /* 8.8px */
+		border: 1px solid var(--input);
+		background: var(--card);
+		color: var(--foreground);
+		transition:
+			border-color 160ms ease,
+			box-shadow 160ms ease;
+	}
+	.field-input::placeholder {
+		color: var(--muted-foreground);
+		opacity: 0.85;
+	}
+	.field-input:hover:not(:disabled):not(:focus) {
+		border-color: color-mix(in oklch, var(--input), var(--foreground) 16%);
+	}
+	.field-input:focus,
+	.field-input:focus-visible {
+		outline: none;
+		border-color: var(--ring);
+		box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 22%, transparent);
+	}
+	.field-input:disabled {
+		opacity: 0.7;
+		cursor: default;
+	}
+
+	/* Modern ambient field: a fine dot matrix lit by soft multi-hue corner glows
+	   (indigo / cyan / pink). The color lives here; surfaces stay clean. */
+	.ambient-bg {
+		background-color: var(--background);
+		background-image:
+			radial-gradient(
+				38% 44% at 8% 2%,
+				color-mix(in oklch, #6366f1 14%, transparent),
+				transparent 70%
+			),
+			radial-gradient(
+				36% 42% at 92% 0%,
+				color-mix(in oklch, #06b6d4 12%, transparent),
+				transparent 70%
+			),
+			radial-gradient(
+				46% 48% at 84% 100%,
+				color-mix(in oklch, #ec4899 9%, transparent),
+				transparent 72%
+			),
+			radial-gradient(
+				circle at center,
+				color-mix(in oklch, var(--border) 70%, transparent) 1px,
+				transparent 1.7px
+			);
+		background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+		background-size:
+			100% 100%,
+			100% 100%,
+			100% 100%,
+			22px 22px;
+	}
+}
+
+@keyframes rise {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@utility animate-rise {
+	animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.animate-rise {
+		animation: none;
+	}
+	html {
+		scroll-behavior: auto;
 	}
 }

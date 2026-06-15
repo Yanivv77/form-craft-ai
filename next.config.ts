@@ -10,9 +10,18 @@ const nextConfig: NextConfig = {
 	// Locale entry redirect. We can't use next-intl middleware: Next 16 forces the
 	// proxy/middleware onto the Node.js runtime, which @opennextjs/cloudflare does
 	// not yet support (workers-sdk#13755). A routes-manifest redirect is built into
-	// the worker and needs no middleware. When more locales are added, revisit this.
+	// the worker and needs no middleware. It is cookie-aware (NEXT_LOCALE) but has
+	// no Accept-Language negotiation — that capability lived in the middleware.
 	async redirects() {
-		return [{ source: "/", destination: "/en", permanent: false }];
+		return [
+			{
+				source: "/",
+				has: [{ type: "cookie", key: "NEXT_LOCALE", value: "he" }],
+				destination: "/he",
+				permanent: false,
+			},
+			{ source: "/", destination: "/en", permanent: false },
+		];
 	},
 };
 

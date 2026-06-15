@@ -1,16 +1,13 @@
 import { expect, test } from "@playwright/test";
-import messages from "../../messages/en.json";
 
 test("/ redirects to the default locale", async ({ page }) => {
 	await page.goto("/");
 	await expect(page).toHaveURL(/\/en\/?$/);
 });
 
-test("/en renders the localized heading from messages/en.json", async ({
-	page,
-}) => {
+test("the homepage is the builder", async ({ page }) => {
 	await page.goto("/en");
-	await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-		messages.HomePage.title,
-	);
+	// No marketing page — the idea box is the first thing a visitor sees.
+	await expect(page.getByLabel("Form idea")).toBeVisible();
+	await expect(page.getByTestId("generate")).toBeVisible();
 });

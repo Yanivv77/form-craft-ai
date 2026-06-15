@@ -1,15 +1,26 @@
 import "../globals.css";
+import { DirectionProvider } from "@base-ui/react/direction-provider";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Figtree, Heebo } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { routing } from "@/i18n/routing";
+import { Header } from "@/components/layout/Header";
+import { localeDirection, routing } from "@/i18n/routing";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
+// Figtree carries all Latin display + text (Pastel's sole family). Heebo covers
+// Hebrew glyphs that Figtree lacks, via the per-glyph fallback in --font-sans.
+const figtree = Figtree({
+	variable: "--font-figtree",
 	subsets: ["latin"],
+	weight: ["400", "500", "600"],
+	display: "swap",
+});
+const heebo = Heebo({
+	variable: "--font-heebo",
+	subsets: ["hebrew", "latin"],
+	weight: ["400", "500", "600"],
+	display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -33,13 +44,31 @@ export default async function LocaleLayout({
 		notFound();
 	}
 	setRequestLocale(locale);
+	const dir = localeDirection(locale);
 
 	return (
-		<html lang={locale}>
-			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-			>
-				<NextIntlClientProvider>{children}</NextIntlClientProvider>
+		<html
+			lang={locale}
+			dir={dir}
+			data-scroll-behavior="smooth"
+			className={`${figtree.variable} ${heebo.variable}`}
+		>
+			<body className="antialiased">
+				{/* Ambient color field + dot matrix behind all content. */}
+				<div
+					aria-hidden
+					className="ambient-bg pointer-events-none fixed inset-0 -z-10"
+				/>
+				<NextIntlClientProvider>
+					<DirectionProvider direction={dir}>
+						{/* Full-height column so pages can pin a footer and fill the
+						    viewport (header → flex-1 content → footer). */}
+						<div className="flex min-h-dvh flex-col">
+							<Header />
+							{children}
+						</div>
+					</DirectionProvider>
+				</NextIntlClientProvider>
 			</body>
 		</html>
 	);
