@@ -1,0 +1,23 @@
+# Copy to `.dev.vars` and fill in real values for local development.
+# `.dev.vars` is gitignored — never commit real secrets. In production these
+# are set with `wrangler secret put <NAME>` (or the Cloudflare dashboard).
+#
+# NOTE: none of these are consumed yet. They document what the implementation
+# prompt (database, auth, AI) will need. Read per-request via lib/cf.ts getEnv().
+
+# Neon Postgres connection string (Drizzle)
+# DATABASE_URL=
+
+# Better Auth — session signing secret. Generate: openssl rand -base64 32
+# BETTER_AUTH_SECRET=
+
+# Google OAuth (Better Auth social provider)
+# GOOGLE_CLIENT_ID=
+# GOOGLE_CLIENT_SECRET=
+
+# Google Gemini
+# GEMINI_API_KEY=
+# GEMINI_MODEL=gemini-2.5-flash
+
+# Set to "1" to enable deterministic test-mode shortcuts during e2e runs
+# E2E_TEST_MODE=
